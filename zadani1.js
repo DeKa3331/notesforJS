@@ -62,6 +62,8 @@ function checkPalindrom(txt)
     return txt===reversedTxt;
 }
 console.log(checkPalindrom("alam"));
+
+
 // Zadanie 6
 // Generowanie i analiza tablicy z losowymi liczbami
 function random(max) {
@@ -72,7 +74,14 @@ for (let i = 0; i < 20; i++) {
   arr.push(random(100));
 }
 arr.sort((a, b) => a - b); // sortowanie rosnąco
-let sum = arr.reduce((a, b) => a + b, 0);
+let sum = arr.reduce((a, b) => a + b, 0); //reduce to fajna opcja kotra z tablicy robi jedna wartosc
+/*
+odpowiednik:
+let sum = 0;
+for (let i = 0; i < arr.length; i++) {
+  sum += arr[i];
+}
+*/
 let avg = sum / arr.length;
 console.log(arr);
 console.log("Suma:", sum);
