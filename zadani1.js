@@ -38,17 +38,30 @@ for (let i = 0; i < 10; i++) {
 }
 let above10 = numbers.filter(n => n > 10).length;
 console.log(numbers); // Wyświetla wylosowane liczby
-console.log(above10 >= 5 ? "udało się" : "niestety nie");
+console.log(numbers.filter(n => n > 10)); //filtruje liczby z tablicy numbers ktore sa wieksze n>10
+/*
+ewentualnie mozna zapisac tak bez strzalki
+let above10 = numbers.filter(function(n) {
+  return n > 10;
+});
+
+*/
+
+console.log(above10);
+console.log(above10 >= 5 ? "udało się" : "niestety nie"); //sprawdzenie czy wiekszosc jest
 
 // Zadanie 5
 // Sprawdzanie czy tekst jest palindromem
-function checkPalindrom(txt) {
-  const clean = txt.toLowerCase().replace(/[^a-z0-9]/g, '');
-  return clean === clean.split('').reverse().join('');
-}
-console.log(checkPalindrom("kajak"));  // true
-console.log(checkPalindrom("rower"));  // false
 
+function checkPalindrom(txt)
+{
+  let reversedTxt = txt.split(""); //dzieli wyraz na literki
+  //let reversedTxt = txt.split("").reverse(); //odwraca kolejnosc
+  //let reversedTxt = txt.split("").reverse().join(""); //laczy w calosc jako jeden string
+  console.log(reversedTxt);
+    return txt===reversedTxt;
+}
+console.log(checkPalindrom("alam"));
 // Zadanie 6
 // Generowanie i analiza tablicy z losowymi liczbami
 function random(max) {
