@@ -97,14 +97,40 @@ function removeDuplicates(nums) {
       nums[k] = nums[i];
     }
   }
-  return k + 1;
+  return k + 1; // k + 1 to liczba unikalnych elementów
 }
-let nums = [1, 1, 2];
+let nums = [1, 1, 2,5,5,,6,7];
 let k = removeDuplicates(nums);
+// nums zmienia się w miejscu, ale slice(0, k) pozwala wyciągnąć unikalne elementy
 console.log(k, nums.slice(0, k)); // 2 [1, 2]
 
+
+// Zadanie 7
+// moja wersja
+
+function removeDuplicatesAndSort(nums) {
+  let uniqueNums = [];
+  
+  for (let i = 0; i < nums.length; i++) {
+    // Dodajemy element tylko, jeśli nie ma go już w tablicy
+    if (!uniqueNums.includes(nums[i])) {
+      uniqueNums.push(nums[i]);
+    }
+    // Sortowanie po każdym dodaniu elementu
+    uniqueNums.sort((a, b) => a - b);
+  }
+  
+  return uniqueNums;
+}
+
+let nums = [1, 1, 2, 5, 5, 6, 7];
+let sortedUnique = removeDuplicatesAndSort(nums);
+console.log(sortedUnique);  // [1, 2, 5, 6, 7]
+
+
+
 // Zadanie 8
-// Szukanie najdłuższego wspólnego prefiksu
+// wersja gpt
 function longestCommonPrefix(strs) {
   if (!strs.length) return "";
   let prefix = strs[0];
@@ -119,8 +145,32 @@ function longestCommonPrefix(strs) {
 console.log(longestCommonPrefix(["flower", "flow", "flight"])); // "fl"
 console.log(longestCommonPrefix(["dog", "racecar", "car"]));    // ""
 
+
+
+
+//zadanie 8 werjsa moja
+function NWP(strs) {
+    if (strs.length === 0) return "";
+
+    let prefiks = "";
+
+    for (let i = 0; i < strs[0].length; i++) {
+        let char = strs[0][i];
+        for (let j = 1; j < strs.length; j++) {
+            if (i >= strs[j].length || strs[j][i] !== char) {
+                return prefiks;
+            }
+        }
+
+        prefiks += char;
+    }
+
+    return prefiks;
+}
+
+
 // Zadanie 9
-// Konwersja liczb rzymskich na arabskie
+// gpt
 function romanToInt(s) {
   const map = {
     I: 1, V: 5, X: 10, L: 50,
@@ -140,6 +190,37 @@ console.log(romanToInt("III"));     // 3
 console.log(romanToInt("LVIII"));   // 58
 console.log(romanToInt("MCMXCIV")); // 1994
 
+
+
+//zadanie 9 moje wsm to samo ale bardziej przejrzyste
+function romanToInt(liczba) {
+    let romanLetters = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    };
+
+    let total = 0;
+
+    for (let i = 0; i < liczba.length; i++) {
+         let value = romanLetters[liczba[i]]; //wartość dla aktualnego znaku
+         let Nvalue = romanLetters[liczba[i + 1]]; //kolejny znak
+        if (Nvalue > value) { //Jeśli wartość następnego znaku jest większa niż bieżącego, to odejmujemy wartość bieżącego znaku
+            total -= value;
+        } else {
+            total += value;
+        }
+    }
+    return total;
+}
+
+console.log(romanToInt("III"));
+console.log(romanToInt("LVIII"));
+console.log(romanToInt("MCMXCIV"));
 // Zadanie 10
 // Dekodowanie ukrytego ciągu znaków na podstawie ruchów
 const arr2 = [
@@ -163,13 +244,80 @@ for (let move of str) {
 }
 console.log(output); // Odszyfrowany tekst
 
+
+
+
+//zad10 moje
+
+ let arr = [
+    [ 66,  97, 114, 100,   4,   2, 110,  11,   1,   6,  20, ],
+    [ 99,   3,  10, 122,  76, 101, 111,   3,  32, 100,   0, ],
+    [  6,  22,   1, 111,  32,  10, 110,   7,  97,  97,  67, ],
+    [ 60,  97, 116,  32, 100,  23,  97, 114, 100,  32,  34, ],
+    [  2, 106,  15,   6, 111,  56,  80,  20,  10,  86,  10, ],
+    [ 20, 110, 121,  32, 107,  55,  50,  99, 110, 105,   8, ],
+    [ 12,   9,  22, 102,  66, 100,  12, 105,  50,  76, 110, ],
+    [ 42,  81, 123,  92,  26,  98,  20,   1,  20,  11,  10, ],
+];
+
+ let str = "rrrdddllddrrruuuurrddrruurddddlld";
+
+let x = 0, y = 0;
+let result = String.fromCharCode(arr[y][x]);
+
+for (let i = 0; i < str.length; i++) {
+     let move = str[i];
+    if (move === 'r') x++;
+    if (move === 'l') x--;
+    if (move === 'd') y++;
+    if (move === 'u') y--;
+
+    result += String.fromCharCode(arr[y][x]);
+}
+console.log(result);
+console.log(String.fromCharCode(65));      // "A"
+console.log(String.fromCharCode(97));      // "a"
+console.log(String.fromCharCode(72, 101, 108, 108, 111)); // "Hello"
+
+
+
+
 // Zadanie 11
 // Długość ostatniego słowa w zdaniu
 function lengthOfLastWord(s) {
-  return s.trim().split(" ").pop().length;
+  return s.trim().split(" ").pop().length; //madre uzycie pop bo zwraca ostanti element z tablicy
 }
+
+let zdanie = "Kocham programowanie w JavaScript";
+
+let slowa = zdanie.split(" "); // ["Kocham", "programowanie", "w", "JavaScript"]
+let ostatnieSlowov2 = slowa[slowa.length - 1];
+let ostatnieSlowo = slowa.pop(); // "JavaScript"
+
+console.log(ostatnieSlowo); // JavaScript
+console.log(slowa); // ["Kocham", "programowanie", "w"]
+console.log(ostatnieSlowov2); // JavaScript
+
 console.log(lengthOfLastWord("Hello World"));             // 5
 console.log(lengthOfLastWord("   fly me   to   the moon  ")); // 4
+
+//11 moje
+zad11
+function lengthOfLastWord(s) {
+    let length = 0;
+    let i = s.length - 1;
+    while (i >= 0 && s[i] === ' ') {
+        i--;
+    }
+    while (i >= 0 && s[i] !== ' ') {
+        length++;
+        i--;
+    }
+    return length;
+}
+console.log(lengthOfLastWord("Hello World"));
+console.log(lengthOfLastWord("   fly me   to   the moon  "));
+
 
 // Zadanie 12
 // Liczenie możliwych sposobów wejścia na szczyt schodów
@@ -185,3 +333,40 @@ function climbStairs(n) {
 }
 console.log(climbStairs(2)); // 2
 console.log(climbStairs(3)); // 3
+
+
+
+
+//zad12 moje
+function schody(n) {
+    if (n === 1) return 1;
+    if (n === 2) return 2;
+
+    let a = 1;
+    let b = 2;
+
+    for (let i = 3; i <= n; i++) {
+        let temp = a + b;
+        a = b;
+        b = temp;
+    }
+
+    return b;
+}
+console.log(schody(2));
+console.log(schody(3));
+console.log(schody(5));
+
+
+//wersja rekurencyjna:
+function schody(n) {
+    if (n === 1) return 1; // tylko jeden sposób wejścia
+    if (n === 2) return 2; // dwa sposoby: (1+1) lub (2)
+    return schody(n - 1) + schody(n - 2);
+}
+
+console.log(schody(2)); // 2
+console.log(schody(3)); // 3
+console.log(schody(5)); // 8
+
+
