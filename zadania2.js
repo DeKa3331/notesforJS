@@ -131,3 +131,38 @@ console.log(text.generateRandom(10));                     // np. "xhfubweqpa"
 
 
 //zad4
+
+Jeśli dobrze rozumiem to dzieki dziedziczeniu prototypowym każdy  obiekt może dziedziczyć po innym?
+ "syntactic sugar" w JS chodzi o to, ze klasy nie zmieniają działania języka, tylko ułatwiają pisanie kodu w bardziej przystępny sposób.
+   Jezeli chodzi o mechanizm to jeśli dobrze rozumiem to działa tak samo, tylko ułatwione jest pisanie dla użytkownika? zamiast tworzyc nowe prototypy to tworzymy funkcje i program sam przypisuje metode do prototypu?
+
+
+String.prototype.mirror = function () {
+  return this.split('').reverse().join('');
+};
+console.log("Ala ma kota".mirror());
+
+
+//zad5
+clousures w JS to cos takiego ze tworzymy zmienna, i ta zmienna jest zapisywana w swoim zakresie. Jak w przykłądowym zadaniu counter1, nastepnie jak wywołujemy to to ta zmienna mimo że jest wywołana głębiej w kodzie (nie istnieje globalnie) to nadal jest aktualizowana i przechowywuje nowe wartości
+function createCounter() {
+  let count = 0;
+
+  return function () {
+    count++;
+    return count;
+  };
+}
+const counter1 = createCounter();
+console.log(counter1()); // 1
+console.log(counter1()); // 2
+console.log(counter1()); // 3
+
+const counter2 = createCounter();
+console.log(counter2()); // 1
+console.log(counter2()); // 2
+
+
+
+
+
