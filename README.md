@@ -139,4 +139,59 @@ const randomItem = arr => arr[Math.floor(Math.random() * arr.length)];
 
 ---
 
-Powodzenia na kolokwium! 🚀
+# 📚 Przydatne funkcje JavaScript – Kolokwium
+
+## 🔹 Tablice (Array methods)
+
+### 1. `.map()`
+Tworzy nową tablicę z przekształconych elementów:
+```js
+[1, 2, 3].map(x => x * 2); // [2, 4, 6]
+[1, 2, 3, 4].filter(x => x % 2 === 0); // [2, 4]
+[1, 2, 3, 4].reduce((sum, x) => sum + x, 0); // 10
+[1, 2, 3].forEach(x => console.log(x));
+[1, 2, 3].find(x => x > 1); // 2
+[1, 2, 3].includes(2); // true
+[1, 2, 3].includes(5); // false
+[2, 4, 6].every(x => x % 2 === 0); // true
+[1, 3, 5, 6].some(x => x % 2 === 0); // true
+[5, 2, 9].sort(); // [2, 5, 9] - OK
+["c", "a", "b"].sort(); // ["a", "b", "c"]
+
+// Liczby trzeba sortować z funkcją:
+[10, 2, 5].sort((a, b) => a - b); // [2, 5, 10]
+[1, 2, 3].reverse(); // [3, 2, 1]
+const add = (a, b) => a + b;
+function counter() {
+  let count = 0;
+  return () => ++count;
+}
+const c = counter();
+c(); // 1
+c(); // 2
+const person = { name: "Ala", age: 25 };
+const { name, age } = person;
+class Animal {
+  constructor(name) { this.name = name; }
+}
+class Dog extends Animal {
+  bark() { return "Woof!"; }
+}
+const obj = { a: 1, b: 2 };
+Object.keys(obj);   // ["a", "b"]
+Object.values(obj); // [1, 2]
+Object.entries(obj); // [["a", 1], ["b", 2]]
+Math.max(1, 5, 10); // 10
+Math.floor(4.7);    // 4
+Math.random();      // np. 0.38291
+const arr = [1, 2];
+const newArr = [...arr, 3]; // [1, 2, 3]
+
+const obj = { a: 1 };
+const copy = { ...obj, b: 2 }; // { a: 1, b: 2 }
+const result = age >= 18 ? "Dorosły" : "Niepełnoletni";
+setTimeout(() => console.log("Hello"), 1000); // po 1s
+
+const timer = setInterval(() => console.log("Tick"), 1000);
+// clearInterval(timer); // zatrzymanie
+
